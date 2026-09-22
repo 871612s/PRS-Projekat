@@ -1,225 +1,112 @@
+## Performanse računarskih sistema
+
+## Domaći zadatak za školsku 2025/2026. godinu
+
+Predmetni profesor: dr Jelica Protić
+
+Predmetni asistenti: Predrag Obradović i Matija Dodović
+
+## Uvod
+
+analize performansi jednog jednostavnog sistema. Preporučujemo da se njihovom rešavanju pristupi redom kojim su navedeni. Smatramo da će na taj način implementirani sistem biti logično strukturiran, a proces izrade projekta fokusiran.
+
+Prva kategorija bavi se analitičkim rešavanjem problema koristeći teorijska razmatranja
+
+obrađena na predmetu. Kao i uvek u stohastičkim proračunima, sistem se idealizuje i rezultati koji se dobijaju su relativno dobra ocena očekivanih vrednosti, ali bez merenja ili simulacije ne možemo biti sigurni koliko dobro opisuju sistem koji razmatramo jer ne znamo da li važe stohastičke pretpostavke.
+
+Zahtevi iz druge kategorije vezani su za simulaciju sistema. Umesto idealizovanih
+
+stohastičkih pretpostavki, svaki servisni centar se nezavisno modeluje. Simulacioni metod je primenljiv i u rešavanju sistema koji nisu rešivi analitički.
+
+Treća kategorija sadrži stavke vezane za dokumentovanje, vizuelizaciju, upoređivanje i
+
+tumačenje rezultata dobijenih analitičkim rešavanjem i simulacijom. Istinsko razumevanje rada realnog sistema može proisteći samo iz detaljnog upoređivanja analitičke i simulacione metode, pa se i u ovom veoma jednostavnom problemu tome pridaje veliki značaj.
+
+Zahtevi u okviru ovog projekta grupisani su u 3 kategorije koje odražavaju različita lica
+
+## Opšte napomene
+
+Program je dozvoljeno pisati u jednom od sledećih programskih jezika: Python, C, C++, Java,
+
+C#. Domaći zadatak se radi i brani samostalno. Ukoliko se na odbrani utvrdi da student nije samostalno radio zadatak, dobiće -5 poena koji se dodaju na konačni broj poena dobijenih na osnovu definisane formule za ocenjivanje i važe dva ispitna roka nakon odbrane (uključujući ispitni rok u kojem je bila odbrana domaćeg).
+
+Arhivu sa izvornim kodom programa i prevedenim programom, spremnim za izvršavanje,
+
+rezultatima simulacije i analize i traženim dijagramima, kao i dokumentovanom analizom rešenja potrebno je poslati preko odgovarajuće veb forme, koja će biti blagovremeno aktivirana. Štampanu dokumentaciju je potrebno predati prilikom odbrane.
+
+Rok za predaju domaćeg zadatka objavljuje se putem mejling liste. Posle toga, forma za slanje
+
+domaćih se gasi. Datum odbrane će biti određen naknadno, a u zavisnosti od rasporeda ispita u ispitnom roku.
 
 
-Универзитет у Београду - Електротехнички факултет
-Катедра за рачунарску технику и информатику
+## Opis sistema
 
-## 1
+Multiprogramski računar modeluje se otvorenom mrežom koja radi u stacionarnom režimu.
 
-Пројекат из предмета Програмирање интернет апликација
-за јунски и јулски рок у школској 2025/26. години (ИР3ПИА)
-Реализовати  веб  систем  „SportSphere  Hub“  за  резервисање  терена  и  хала,  заказивање
-тренинга, куповину опреме, проналажење саиграча и промоције. Систем треба да омогући
-ефикасно управљање ресурсима, терминима и активностима корисника. Постоје три врсте
-корисника:  регистровани  корисник  (спортиста),  запослени  у  спортском  објекту  и
-администратор веб система.
-Аутентификација и регистрација
-Свим корисницима треба омогућити пријављивање у систем коришћењем креденцијала
-(корисничко име и лозинка). У случају погрешно унетих података приказати одговарајућу
-поруку.
-У случају заборављене лозинке, постоји линк испод форме за пријављивање који води на
-страну где корисник уноси корисничко име или и-мејл адресу, чиме добија привремени
-веб линк за постављање нове лозинке (важећи 30 минута).
-Спортиста  и  запослени  се  пријављују  преко  јавно  видљиве  форме  на  почетној  страни.
-Администратор се пријављује преко посебне форме на скривеној рути (иста поља, али није
-доступна са почетне стране).
-Могућа је регистрација нових корисника из категорије спортиста/запослени, који уносе:
-корисничко  име  (јединствено),  лозинку
-## 1
-,  име,  презиме,  контакт  телефон,  и-мејл
-(јединствено), профилну слику (додаје се као фајл), и одабир највише пет спортова који их
-највише занимају (падајућа листа са избором више ставки). Профилну слику корисник
-додаје  искључиво  преко FileUpload прозора,  отпремањем  постојеће  фотографије  или
-генерисањем  аватара  у  самој  форми  за  регистрацију
-## 2
-.  Није  дозвољено  уношење  слике
-путем  екстерног  линка.  Ако  профилна  слика  није  додата или  није  генерисан  аватар,
-корисник добија подразумевану слику дефинисану у систему.
-Запослени,  поред  основних  података,  уноси  назив  спортског  објекта,  адресу  седишта,
-матични број (тачно 8 цифара, који је јединствен) и порески идентификациони број (скр.
-ПИБ,  који  има тачно 9  цифара и не  сме  почињати  нулом).  Један  објекат  може  имати
-највише два запослена; регистрација трећег у истом објекту је забрањена.
-Након исправног уноса (JavaScript провере) креира се захтев за регистрацију који чека
-одобрење администратора. Регистрација администратора се не реализује, већ сматрати да
+Sadrži procesor, tri sistemska diska i 𝐾 korisničkih diskova. Poasonov tok poslova intenziteta 𝛼 pristiže na procesor. Procesorska obrada traje u proseku 𝑆𝑝 = 4𝑚𝑠, prosečno vreme opsluživanja za sistemske diskove iznosi po 𝑆𝑑1 = 10𝑚𝑠, 𝑆𝑑2 = 𝑆𝑑3 = 15𝑚𝑠, a za korisničke diskove po 𝑆𝑑𝑘 = 25𝑚𝑠. Sva vremena imaju eksponencijalnu raspodelu.
 
-## 1
-Лозинку  проверити  регуларним  изразом  (8-12  карактера,  бар  једно  велико  слово,  један  број  и  један
-специјални карактер, мора почињати словом). У бази чувати шифровану (енкриптовану) лозинку.
-## 2
-Корисник може  да  изабере  опцију  „Генериши  аватар“  уместо  да  отпреми  фотографију.  Потребно  је
-користити неку од библиотека за аватаре (нпр. DiceBear). Генерисани аватар се приказује у прегледу код
-форме; дугметом „Сачувај као профилну слику“ слика се конвертује у PNG/JPG и шаље на сервер истим
-механизмом као и при обичном слању фајла са FileUpload.
+Posle procesorske obrade u 20% slučajeva zahteva se pristup prvom sistemskom disku, u 15%
 
-Универзитет у Београду - Електротехнички факултет
-Катедра за рачунарску технику и информатику
+slučajeva drugom, u 10% slučajeva trećem, a u 40% slučajeva pristupa se nekom od 𝐾 korisničnih diskova (sa jednakom verovatnoćom za svaki disk). U 15% slučajeva posle obrade na procesoru posao se vraća u red za čekanje procesora.
 
-## 2
+Posle pristupa nekom sistemskom disku, u 35% slučajeva ne vrši se nikakva obrada već se
 
-постоји један  регистрован  администратор на  нивоу  система,  који се  већ  налази  у  бази
-података.
-Нерегистровани корисник
-На  почетној веб страни  приказати  опште  информације  о  укупном  броју  активних
-спортских објеката и ТОП 3 најбоље оцењена објекта на основу броја „свиђања“ (лајкова).
-Такође на почетној веб страни приказати највише 3 актуелне промоције (назив промоције,
-објекат, период важења, проценат или фиксни попуст).
-Нерегистровани  корисник  види  форму за  претрагу у  којој  уноси назив  објекта,  град
-(падајућа листа са више избора - само градови где постоје активни објекти), врста спорта
-(падајућа листа) и/или тип терена (отворени/затворени).
-Резултате претраге приказати у табели, а поред сваког објекта приказати дугме „Детаљи“.
-Омогућити  сортирање  (растуће/опадајуће)  по  називу  објекта,  граду  и  врсти  спорта
-притиском на текст у заглављу табеле (или стрелице поред текста). Дугме „Детаљи“ води
-на посебну веб страну на којој су приказани: назив, град, адреса, број свиђања/несвиђања,
-листа доступних терена/хала, ценовник по сату и галерија слика.
-Регистровани корисник (спортиста)
-Након пријаве, спортиста кроз главни мени приступа функционалностима:
-- Профил: Омогућити преглед и ажурирање личних података (без промене корисничког
-имена), промену профилне слике и ажурирање листе омиљених спортова. Испод табеле
-личних података види се табела свих претходних и актуелних резервација терена/хала
-са колонама: назив објекта, град, терен/хала, спорт, интервал термин (од – до) и статус.
-Омогућити сортирање садржаја по свим колонама. Дугме „Откажи“ постоји само за
-резервације које почињу за 12 и више сати, а ако резервација почиње за мање од 12
-сати, отказивање  није  дозвољено. Спортиста  може  да  откаже  и  резервације  које
-запослени још увек није потврдио.
-- Претрага  и  резервација:  Форма за  претраживање  треба  да  буде слична као  код
-нерегистрованог корисника, уз додатну опцију за потврђивање (штиклирање) - „само
-слободни термини данас“. Табела резултата се приказује испод форме, а страница са
-детаљима  садржи дужи  опис,  галерију,  динамичку мапу (маркер  локације)  и
-интерактивни  календар  за  изабрани  терен/халу.  Ако  претрага  врати  више
-одговарајућих терена истог типа, омогућити ротирање календара (дугмад улево/удесно)
-тако да се увек види распоред једног терена. Резервација се врши за конкретан дан и
-временски  период,  преко  форме,  а  може и  преко  календара. Најмања  временска
-јединица за резервацију је 1 сат, a резервације могу почињати на пун сат.
-На слици 1 приказан је пример недељног интерактивног календара за резервацију терена:
-заузети термини, слободни термини и одабрани термин који спортиста резервише.
+procesi ponovo vraćaju u procesorski red. U 25% slučajeva ponavlja se obrada na tom sistemskom disku. U preostalih 40% slučajeva pristupa se nekom od 𝐾 korisničkih diskova (sa jednakom verovatnoćom za svaki disk).
 
-Универзитет у Београду - Електротехнички факултет
-Катедра за рачунарску технику и информатику
+Posle pristupa korisničkom disku proces napušta sistem.
 
-## 3
+## Zadaci
+
+resursa, protoke kroz resurse, prosečan broj poslova u svakom od resursa ovog sistema i vreme odziva ovog sistema sa centralnim serverom za K od 2 do 5. Ovi parametri se određuju za različite vrednosti ulaznog toka 𝑟 ⋅ 𝛼𝑚𝑎𝑥, 𝑟 ∈ {0.30, 0.55, 0.80, 1.00}. Odrediti kritični resurs u sistemu.
+
+Za otvorenu mrežu kojom se modelira ovaj računarski sistem, potrebno je odrediti iskorišćenja
+
+## Analitičko rešavanje (10p)
+
+- 1) (4p) Obezbediti funkcionalnost koja na osnovu definisanih ulaznih parametara sistema (topologije sistema date kroz matricu verovatnoća tranzicija P i vektora brzina servera) matričnom metodom za rešavanje otvorenih mreža prikazanom na predavanjima određuje protoke kroz servere u funkciji od 𝛼. Izračunavanje protoka sprovesti za svako K (broj korisničkih diskova) i odnose protoka i intenziteta ulaznog toka upisati u prvi izlazni fajl (nazvati fajl logično, recimo “protoci_analiticki”).
+
+- 2) (3p) Odrediti granične vrednosti intenziteta ulaznog toka 𝛼𝑚𝑎𝑥 za koje je sistem u stacionarnom režimu (u zavisnosti od K). Za svaku vrednost K iz datog opsega odrediti kritični resurs i dati grafik zavisnosti 𝛼𝑚𝑎𝑥(𝐾).
+
+- 3) (3p) Korišćenjem Džeksonove teoreme odrediti sve tražene parametre i upisati ih u drugi izlazni fajl (nazvati fajl logično, recimo “rezultati_analiticki”). Analizu sprovesti za svako K (broj korisničkih diskova).
 
 
-Слика 1. Пример интерактивног календара за резервацију терена (улога спортиста)
-- Проналажење саиграча: Спортиста може објавити оглас „тражим саиграче“ за одабрани
-спорт, град, датум, термин и број недостајућих играча. Сви активни огласи се приказују
-у  табели,  а други  спортисти  могу  послати  захтев  за  придруживање.  Аутор  огласа
-одобрава или одбија захтеве других спортиста за своје огласе. Након комплетирања
-екипе, оглас постаје неактиван или га власник огласа може сам затворити (поред својих
-огласа спортиста види дугме „Затвори оглас“).
-- Индивидуални тренинг: Спортиста може да врши преглед тренера по објекту и спорту
-(име, специјализација, просечна оцена, цена по сату). Заказивање термина могуће је
-преко форме, а спортиста види архиву одржаних и заказаних тренинга у профилу.
-- Продавница опреме: Спортиста може да прегледа каталог опреме по врстама спорта
-(слика, назив, цена, стање залихе). Имплементирати корпу и наручивање (без онлајн
-плаћања).  Статуси поруџбине могу  бити: наручено, преузето, отказано. Спортиста
-види  историју куповине  у свом профилу,  као  и  активне  поруџбине,  које  у  сваком
-тренутку може отказати.
-- Оцене: Спортиста може да остави свиђање/несвиђање и коментар за објекат, само ако
-је бар једном имао потврђену резервацију у том објекту. Број реакција и коментара по
-кориснику  не  може  бити  већи  од  броја  потврђених  резервација  у  том  објекту.  На
-детаљима  приказати  последњих 5 коментара,  а сопствене  коментаре  визуелно
-истакнути.
-- Статистика: Приказати следеће дијаграме - број одиграних/резервисаних термина по
-сваком спорту понаособ (стубасти дијаграм), месечни преглед активности (линеарни
-тренд) и укупна потрошња на опрему за све спортисте.
+## Simulacija (10p)
 
-Универзитет у Београду - Електротехнички факултет
-Катедра за рачунарску технику и информатику
+Potrebno je implementirati funkcionalnost koja će simulirati dati sistem i na osnovu rezultata
 
-## 4
+simulacije odrediti i prikazati (upisati u treći izlazni fajl, nazvan logično, recimo “rezultati_simulacija”) sve tražene parametre sistema za svako K (broj korisničkih diskova). Osim variranja K, varira se i intenzitet ulaznog toka. Intenziteti za koje treba izvršiti simuliranje su dati sa 𝑟 ⋅ 𝛼𝑚𝑎𝑥, 𝑟 ∈ {0.30, 0.55, 0.80, 1.00}.
 
-Запослени у спортском објекту
-- Профил: Запослени може да прегледа и ажурира личне податке и профилну слику.
-Такође види табелу свих објеката које запослени/правно лице води: назив, град, врсте
-спортова,  елементи  (обавезно  најмање  један  отворени  терен  са  N  места,  N≥4,
-јединствени  називи  затворених  хала/терена  са  капацитетом  и  јединствени  називи
-дворана за тимске спортове).
-- Додавање  и  ажурирање  објекта: Омогућити  креирање  новог  објекта  са  ценом
-резервације по сату, радним временом и бројем дозвољених казнених непојављивања
-пре  блокаде  корисника у  том  објекту. Такође,  омогућити  додавање  терена,  хала  и
-дворана са јединственим називима, капацитетом и описом опреме (до 300 карактера).
-Нови објекти могу да се додају и преко JSON фајла, преко FileUpload прозора, са истим
-подацима као при уносу преко форме.
-- Резервације  и  тренинзи: Запослени  види  табеларни  преглед  резервација  терена  и
-заказаних индивидуалних тренинга. До 10 минута по почетку термина види дугмад
-„Потврди“  (корисник  дошао)  или  „Одјави“  (није  дошао).  Након  дефинисаног  броја
-недолазака, корисник губи право резервације у том објекту.
-- Промоције  и  опрема: Омогућити  креирање/ажурирање  промоција  (период,  попуст,
-врста спорта), као и управљање каталогом опреме (додавање, ажурирање цене и залиха,
-обрада наруџбина са могућим статусима прихваћено/преузето/отказано).
-- Интерактивни  календар: Запослени  види  преглед  свих  објеката  и  појединачних
-терена/хала, тако што их бира их падајућих листа. Омогућити померање термина у
-затвореним халама/дворанама превлачењем картице са термином (енг. drag-and-drop).
-На слици 2 приказан је пример календара запосленог, односно преглед резервација и
-тренинга по терену/хали, са техником превлачења.
-- Извештаји: Генерисање месечног PDF извештаја о попуњености терена (% по ресурсу)
-и извештаја о промету опреме за изабрани месец.
+Potrebno je obezbediti mogućnost podešavanja simuliranog vremena rada sistema (u
 
-Слика 2. Пример интерактивног календара запосленог (превлачење термина)
+minutima), a podrazumevano vreme trajanja simulacije je 0.5h (ne realnog vremena rada programa, već simuliranog vremena rada sistema!).
 
-Универзитет у Београду - Електротехнички факултет
-Катедра за рачунарску технику и информатику
+Simulaciju treba ponoviti 100 puta za svaku od vrednosti parametara r i K i rezultate
 
-## 5
+usrednjiti, pa usrednjene rezultate upisati u četvrti fajl (nazvan logično, recimo “rezultati_simulacija_usrednjeno”). Naravno, usrednjavaju se rezultati simulacije za isto r i K!
 
-Администратор система
-Администратор управља корисницима система: може да прегледа, мења и брише налоге.
-Захтеве  за  регистрацију  спортиста  и  запослених,  администратор разматра  у  посебном
-прегледу и сваки захтев може да одобри или одбије.
-Сваки  нови  спортски  објекат  који  унесе  запослени  мора  бити  одобрен  од  стране
-администратора пре него што постане видљив осталим корисницима.
-Поред тога, администратор води евиденцију тренера (преглед и деактивација) и може да
-додаје нове врсте спортова у систем.
+## Analiza i dokumentovanje rezultata (10p)
 
-Остале карактеристике апликације
-Апликација треба да буде отпорна на унос некоректних података. Потребно је направити и
-униформни изглед апликације користећи CSS (Cascading  Style  Sheets). Свака веб страна
-треба да садржи мени и заглавља (header и footer). На свим екранима где је приказан
-жељени садржај треба омогућити опцију за повратак на почетни екран са корисничким
-опцијама (ово само уколико немате мени који је увек видљив). Такође на свим екранима је
-потребан и линк који води на почетни екран за пријављивање (опција: Излогуј се). Сваки
-вид серверске валидације потребно је што ефикасније реализовати. Веб апликација треба
-да буде прилагодљива и мањим и већим екранима („responsive web design“). Тестирати веб
-апликацију у најмање 3 стандардна веб прегледача.
-## Напомене:
-Пројекат из предмета Програмирање интернет апликација се ради самостално и услов је за
-полагање испита. Пројекат се може бранити у испитном року у коме се ради писмени
-испит или у неком од наредних рокова. Пројекат вреди максимално 30 поена.
-На усменој обрани кандидат мора самостално да инсталира све програме неопходне за
-исправан  рад  приложеног  решења  (уколико  не  постоје  у  рачунарској  лабораторији).
-Кандидат  мора  да  поседује  потребан  ниво  знања  о  пројектном  задатку,  мора  да  буде
-свестан недостатака приложеног решења и могућности да те недостатке реши. Кандидат
-мора тачно да одговори и на одређен број питања која се баве тематиком пројекта.
-Одбране пројеката се одржавају уживо, у рачунарским лабораторијама Електротехничког
-факултета  у  Београду,  осим  у  случају  ванредног  стања  или  других  стриктних
-епидемиолошких мера, када предметни наставници могу до 24 сата пре одбране да одлуче
-да се одбрана у том случају одржи путем интернет везе (уз обавезно укључену веб камеру,
-исправан микрофон и коректну интернет конекцију).
+Potrebno je napisati dokumentaciju koja detaljno objašnjava metod simulacije i analitičko
+
+rešavanje problema i upoređuje rezultate dobijene analitičkom metodom, simulacijom i usrednjene rezultate više simulacija.
+
+U dokumentaciji priložiti tabelarne izveštaje relativnog odstupanja traženih parametara
+
+sistema dobijenih analičkom metodom od rezultata simulacije i od usrednjenih rezultata više simulacija. Tabelarni izveštaj treba da prikazuje vrednosti i relativna odstupanja traženih parametara u zavisnosti od broja korisničkih diskova u sistemu za vrednosti parametra r date u opisu simulacije. Šta se može zaključiti o rezultatima simulacije i usrednjenim rezultatima više simulacija? Koji od njih imaju manje relativno odstupanje od rezultata dobijenih analitičkom metodom? Kako i zašto broj izvršenih simulacija utiče na relativno odstupanje?
+
+Dokumentacija treba da sadrži i sledeće dijagrame, konstruisane na osnovu rezultata analitičkog rešavanja:
+
+- a) Dijagrame zavisnosti iskorišćenja procesora, korisničkog diska i sistemskog diska od K (crtati različitim bojama i simbolima na istom grafiku i priložiti legendu koja jasno govori šta koja kriva predstavlja) za vrednosti parametra r date u opisu simulacije (ukupno 4 grafika, po jedan za svaku vrednost r). Kao i do sada, K se kreće od 2 do 5.
+
+- b) Dijagrame zavisnosti vremena odziva procesora, korisničkog diska i sistemskog diska od K (crtati različitim bojama i simbolima na istom grafiku i priložiti legendu koja jasno govori šta koja kriva predstavlja) za vrednosti parametra r date u opisu simulacije (ukupno 4 grafika, po jedan za svaku vrednost r). Kao i do sada, K se kreće od 2 do 5.
+
+- c) Dijagram zavisnosti vremena odziva sistema od K za vrednosti parametra r date u opisu simulacije (ukupno 4 grafika, po jedan za svaku vrednost r). Kao i do sada, K se kreće od 2 do 5.
+
+Odgovoriti i na pitanje koji je resurs kritičan za svaku kombinaciju parametara r i K.
 
 
-Универзитет у Београду - Електротехнички факултет
-Катедра за рачунарску технику и информатику
+Datum izmene
 
-## 6
+## Zapisnik izmena
 
-За израду пројектног задатка потребно је користити:
-1) Angular  20  framework са Spring  Boot  3.5.x (опционо 4.x) уз  примену  неког  радног
-оквира  за  објектно  релационо  мапирање  (проверити  доступне  верзије  на  сајту
-предмета; пожељно је преузети иницијално празан пројекат са предметног сајта и њега
-надограђивати);  при  развоју  пројекта  у  овим  технологијама  потребно  је  користити
-MySQL (или PostgreSQL) релациону базу података или
-2) Angular  20  framework са Express и NodeJS у серверском делу (проверити доступне
-верзије  на  сајту  предмета;  пожељно  је  преузети  иницијално  празан  пројекат  са
-предметног сајта и њега надограђивати), уз коришћење нерелационе базе MongoDB.
-Сваки вид серверске валидације потребно је што ефикасније реализовати. Подразумевати
-да се база података иницијално креира и попуњава независно од ове апликације (тј. табеле
-или колекције у бази не треба креирати из саме апликације, већ независно од ње).
-На одбрану је потребно донети базу података која је попуњена са довољном количином
-података, како би био омогућен преглед свих реализованих функционалности апликације,
-у супротном се добија -5 поена.
-Одбрана ће бити организована у јунском и јулском року, након писменог дела испита, а
-тачан дан и сатница ће бити објављени након истека рока за пријаву одбране пројекта.
-Предметни  наставници  задржавају  право  да  изврше  аутоматску  и  мануелну  проверу
-сличности предатих студентских пројеката пре, за време или након одбране. Уколико се
-утврди недозвољена сарадња, студенти ће бити удаљени са одбране пројекта, поени на
-свим  активностима  до  тада  се  поништавају  на  0,  а  против  таквих  студената  ће  бити
-поднете пријаве Дисциплинској комисији Електротехничког факултета у Београду.
+Izmena
